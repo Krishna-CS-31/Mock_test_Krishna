@@ -1,0 +1,41 @@
+<div class="container mt-4 p-4 rounded" style="background-color: #e6f2ff;">
+  <h3 class="text-primary mb-3">Add Marvel Comic</h3>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="row g-3 mb-4">
+    <div class="col-md-3">
+      <input formControlName="title" class="form-control" placeholder="Title" />
+    </div>
+    <div class="col-md-3">
+      <input formControlName="hero" class="form-control" placeholder="Hero" />
+    </div>
+    <div class="col-md-3">
+      <input formControlName="publisher" class="form-control" placeholder="Publisher" />
+    </div>
+    <div class="col-md-3">
+      <input formControlName="releaseDate" type="date" class="form-control" />
+    </div>
+    <div class="col-md-12 d-flex justify-content-end gap-2">
+      <button type="submit" class="btn btn-primary">{{ isEditing ? 'Update' : 'Add' }}</button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">Clear</button>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let comic of comics">
+      <div class="card border-primary shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ comic.title }}</h5>
+          <p class="card-text">
+            <strong>Hero:</strong> {{ comic.hero }}<br>
+            <strong>Publisher:</strong> {{ comic.publisher }}<br>
+            <strong>Release:</strong> {{ comic.releaseDate | date:'longDate' }}
+          </p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <button class="btn btn-sm btn-warning" (click)="edit(comic)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="delete(comic.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
