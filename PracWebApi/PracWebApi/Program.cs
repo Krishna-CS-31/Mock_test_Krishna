@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PracWebApi.Data;
+using PracWebApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +12,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("PracDb"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Defaultconnection"));
 });
+
+builder.Services.AddScoped<IMarvelComicsRepository, MarvelComicsRepository>();
+
+
 var app = builder.Build();
 app.UseCors(options =>
 {
@@ -26,6 +31,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 

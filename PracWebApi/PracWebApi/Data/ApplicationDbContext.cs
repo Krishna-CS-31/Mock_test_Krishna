@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PracWebApi.Controllers;
+using PracWebApi.Models;
 
 namespace PracWebApi.Data
 {
@@ -8,5 +10,8 @@ namespace PracWebApi.Data
         {
         }
         public DbSet<WeatherForecast> WeatherForecasts { get; set; }
+
+        public DbSet<MarvelComics> Comics { get; set; }
+
     }
 }
